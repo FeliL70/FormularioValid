@@ -10,11 +10,15 @@
 <body>
     <form  onsubmit="return validarFormulario()">
         <h1>Crea tu Cuenta</h1>
-
+    <div class="parte-name"></div>
         <label for="Username">
             <h3>Nombre Completo</h3>
-            <input type="text" id="Username" name="Username" placeholder="Ingresa tu nombre" />
+            <input type="text" id="Username" name="Username" placeholder="Ingresa tu nombre" oninput="NombreBien()"  />
         </label>
+        <div class="valid-nombre nube-requisitos">
+            <p id="largo" class="Validacion">✖ Mas de 3 caracteres</p>
+        </div>
+    </div>
 
         <label for="Email">
             <h3>Email</h3>
