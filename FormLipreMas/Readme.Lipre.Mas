@@ -1,6 +1,0 @@
-hicimos un formulario para que el usuario pueda ingresar su nombre, mail y contraseña y agregamos que al terminar de escribir cada parte, vaya a hacer verificaciones en funciones de js dependiendo que quiera validar, como por ejemplo, cuando ingresas la contraseña, que cumpla con todos los requisitos como la longitud minima, que tenga mayúsculas y caracteres especiales.
-
-enfrentamos muchos desafíos con el tema del css ya que recordamos muy poco y tuvimos que ayudarnos con paginas diferentes e inteligencia artificial.
-también tuvimos problemas con las validaciones de la contraseña, pero al final pudimos resolverlo ayudándonos con el proyecto del año pasado.
-
-nos gustaria mejorar el diseño porque nos parece un poco básico.
