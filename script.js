@@ -28,11 +28,14 @@ function NombreBien() {
 }
 
 function emailBien() {
-    if (emailCorrecto.value.includes('@')) {
-        mensajeEmail.innerHTML = '✔ Email válido';
+    const email = emailCorrecto.value;
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    
+    if (regex.test(email)) {
+        mensajeEmail.innerHTML = '✔ Email valido';
         mensajeEmail.style.color = 'green';
     } else {
-        mensajeEmail.innerHTML = '✖ El email debe contener un "@"';
+        mensajeEmail.innerHTML = '✖ El email es invalido';
         mensajeEmail.style.color = 'red';
     }
 }
