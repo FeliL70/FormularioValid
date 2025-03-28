@@ -1,90 +1,120 @@
 const contraseña = document.getElementById('Password');
-const errorRequisitos = document.getElementById('errorRequisitos');
-const caracteresEspeciales = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}', '[', ']', '|', ':', ';', '"', '<', '>', ',', '.', '?', '/', '`', '~'];
-let confirmacion = document.getElementById('ConfirmPassword');
-const errorConfirmacion = document.getElementById('errorConfirmacion');
+const confirmacion = document.getElementById('ConfirmPassword');
 const nombre = document.getElementById('Username');
+const emailCorrecto = document.getElementById('Email');
+const errorRequisitos = document.getElementById('errorRequisitos');
+const errorConfirmacion = document.getElementById('errorConfirmacion');
+const mensajeNombre = document.getElementById('mensajeNombre');
+const mensajeEmail = document.getElementById('mensajeEmail');
+const mensajeLargoContra = document.getElementById('mensajeLargoContra');
+const mensajeMayus = document.getElementById('mensajeMayus');
+const mensajeEspecial = document.getElementById('mensajeEspecial');
+
+const caracteresEspeciales = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}', '[', ']', '|', ':', ';', '"', '<', '>', ',', '.', '?', '/', '~'];
 
 function contieneLetraEspecial(cadena) {
     return caracteresEspeciales.some(caracter => cadena.includes(caracter));
 }
-function NombreBien() 
-{
-    const largo = document.getElementById('largo');
-    const longitud = nombre.value.length >= 3;
 
+function NombreBien() {
+    const longitud = nombre.value.length >= 3;
     if (longitud) {
-        largo.textContent = '✔ Mas de 3 caracteres';
-        largo.style.color = 'green';
+        mensajeNombre.innerHTML = '✔ Más de 3 caracteres';
+        mensajeNombre.style.color = 'green';
     } else {
-        largo.textContent = '✖ Mas de 3 caracteres';
-        largo.style.color = 'red';
-    }
-    if (!(longitud)) {
-        errorRequisitos.style.display = 'block';
-    } else {
-        errorRequisitos.style.display = 'none';
+        mensajeNombre.innerHTML = '✖ El nombre debe tener al menos 3 caracteres';
+        mensajeNombre.style.color = 'red';
     }
 }
-function ContraseñaBien() {
-    const largo = document.getElementById('largo');
-    const mayus = document.getElementById('mayus');
-    const especial = document.getElementById('especial');
 
+function emailBien() {
+    if (emailCorrecto.value.includes('@')) {
+        mensajeEmail.innerHTML = '✔ Email válido';
+        mensajeEmail.style.color = 'green';
+    } else {
+        mensajeEmail.innerHTML = '✖ El email debe contener un "@"';
+        mensajeEmail.style.color = 'red';
+    }
+}
+
+function ContraseñaBien() {
     const longitud = contraseña.value.length >= 8;
     const mayuscula = contraseña.value !== contraseña.value.toLowerCase();
     const contieneEspecial = contieneLetraEspecial(contraseña.value);
 
     if (longitud) {
-        largo.textContent = '✔ Mas de 8 caracteres';
-        largo.style.color = 'green';
+        mensajeLargoContra.innerHTML = '✔ Más de 8 caracteres';
+        mensajeLargoContra.style.color = 'green';
     } else {
-        largo.textContent = '✖ Mas de 8 caracteres';
-        largo.style.color = 'red';
+        mensajeLargoContra.innerHTML = '✖ La contraseña debe tener al menos 8 caracteres';
+        mensajeLargoContra.style.color = 'red';
     }
 
     if (mayuscula) {
-        mayus.textContent = '✔ Minimo 1 letra mayuscula';
-        mayus.style.color = 'green';
+        mensajeMayus.innerHTML = '✔ Mínimo 1 letra mayúscula';
+        mensajeMayus.style.color = 'green';
     } else {
-        mayus.textContent = '✖ Minimo 1 letra mayuscula';
-        mayus.style.color = 'red';
+        mensajeMayus.innerHTML = '✖ Mínimo 1 letra mayúscula';
+        mensajeMayus.style.color = 'red';
     }
 
     if (contieneEspecial) {
-        especial.textContent = '✔ Minimo 1 caracter especial';
-        especial.style.color = 'green';
+        mensajeEspecial.innerHTML = '✔ Mínimo 1 carácter especial';
+        mensajeEspecial.style.color = 'green';
     } else {
-        especial.textContent = '✖ Minimo 1 caracter especial';
-        especial.style.color = 'red';
+        mensajeEspecial.innerHTML = '✖ Mínimo 1 carácter especial';
+        mensajeEspecial.style.color = 'red';
     }
 
     if (!(longitud && mayuscula && contieneEspecial)) {
         errorRequisitos.style.display = 'block';
+        errorRequisitos.innerHTML = 'La contraseña no cumple con los requisitos';
     } else {
         errorRequisitos.style.display = 'none';
     }
 }
 
-
+function validarConfirmacionContraseña() {
+    if (contraseña.value !== confirmacion.value) {
+        errorConfirmacion.style.display = 'block';
+        errorConfirmacion.innerHTML = '✖ Las contraseñas no son iguales';
+    } else {
+        errorConfirmacion.style.display = 'none';
+    }
+}
 
 function validarFormulario() {
-    
+    if (nombre.value.length < 3) {
+        mensajeNombre.innerHTML = '✖ El nombre debe tener al menos 3 caracteres';
+        mensajeNombre.style.color = 'red';
+        return false;
+    }
+
+    if (!emailCorrecto.value.includes('@')) {
+        mensajeEmail.innerHTML = '✖ El email debe contener un "@"';
+        mensajeEmail.style.color = 'red';
+        return false;
+    }
 
     const longitud = contraseña.value.length >= 8;
     const mayuscula = contraseña.value !== contraseña.value.toLowerCase();
     const contieneEspecial = contieneLetraEspecial(contraseña.value);
-
+    
     if (!(longitud && mayuscula && contieneEspecial)) {
         errorRequisitos.style.display = 'block';
+        errorRequisitos.innerHTML = 'La contraseña debe tener al menos 8 caracteres, 1 mayúscula, y 1 carácter especial';
         return false;
     }
+
     if (contraseña.value !== confirmacion.value) {
         errorConfirmacion.style.display = 'block';
+        errorConfirmacion.innerHTML = '✖ Las contraseñas no coinciden';
         return false;
     }
-   
+
+    alert('¡Te registraste correctamente!');
+    
+    document.getElementById('formulario').reset();
 
     return true;
 }
-

@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario de Registro</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form  onsubmit="return validarFormulario()">
+    <form id="formulario" onsubmit="return validarFormulario()">
         <h1>Crea tu Cuenta</h1>
-    <div class="parte-name"></div>
+        
         <label for="Username">
             <h3>Nombre Completo</h3>
-            <input type="text" id="Username" name="Username" placeholder="Ingresa tu nombre" oninput="NombreBien()"  />
+            <input type="text" id="Username" name="Username" placeholder="Ingresa tu nombre" oninput="NombreBien()" />
         </label>
         <div class="valid-nombre nube-requisitos">
-            <p id="largo" class="Validacion">✖ Mas de 3 caracteres</p>
+            <p id="mensajeNombre" class="Validacion"></p>
         </div>
-    </div>
 
         <label for="Email">
             <h3>Email</h3>
-            <input type="email" id="Email" name="Email" placeholder="Ingresa tu mail" />
+            <input type="email" id="Email" name="Email" placeholder="Ingresa tu mail" oninput="emailBien()" />
         </label>
+        <div class="valid-nombre nube-requisitos">
+            <p id="mensajeEmail" class="Validacion"></p>
+        </div>
 
         <div class="parte-contra">
             <label for="Password">
@@ -32,9 +34,9 @@
             </label>
 
             <div class="valid-contra nube-requisitos">
-                <p id="largo" class="Validacion">✖ Mas de 8 caracteres</p>
-                <p id="mayus" class="Validacion">✖ Minimo 1 letra mayuscula</p>
-                <p id="especial" class="Validacion">✖ Minimo 1 caracter especial</p>
+                <p id="mensajeLargoContra" class="Validacion"></p>
+                <p id="mensajeMayus" class="Validacion"></p>
+                <p id="mensajeEspecial" class="Validacion"></p>
             </div>
         </div>
         
@@ -42,19 +44,11 @@
             <input type="password" id="ConfirmPassword" name="ConfirmContraseña" placeholder="Confirmar Contraseña" oninput="validarConfirmacionContraseña()" />
         </label>
 
-        <p class="mensaje-error valid-contra" id="errorConfirmacion">Las contraseñas no son iguales</p>
-        <p class="mensaje-error valid-contra" id="errorRequisitos">Tienes que cumplir con los requisitos de las contraseñas</p>
-
-
-        <p class="mensaje-error valid-contra" id="errorRequisitos">Tienes que cumplir con los requisitos de las contraseñas</p>
+        <p class="mensaje-error valid-contra" id="errorConfirmacion"></p>
+        <p class="mensaje-error valid-contra" id="errorRequisitos"></p>
 
         <button type="submit">Registrar</button>
     </form>
 
-    <div id="mensajeExito" style="display: none;">
-        <p>Te registraste correctamente</p>
-    </div>
 </body>
 </html>
-
-
